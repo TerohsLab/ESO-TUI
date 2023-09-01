@@ -6,7 +6,9 @@ local classIcons = {
 	[2] = [[/esoui/art/icons/class/class_sorcerer.dds]],
 	[3] = [[/esoui/art/icons/class/class_nightblade.dds]],
 	[4] = [[/esoui/art/icons/class/class_warden.dds]],
+	[5] = [[/esoui/art/icons/class/class_necromancer.dds]],
 	[6] = [[/esoui/art/icons/class/class_templar.dds]],
+	[117] = [[/esoui/art/icons/class/class_arcanist.dds]],
 }
 
 local allianceIcons = {
@@ -290,7 +292,6 @@ function UI.InitUnitPower(unitTag)
     end
     powertype_controls[unitTag]["HEALTH_BAR"]:SetMinMax(0, maxHealth)
     powertype_controls[unitTag]["HEALTH_BAR"]:SetValue(currentHealth)
-    local cp = GetUnitChampionPoints(unitTag)
     powertype_controls[unitTag]["NAME"]:SetText(GetUnitName(unitTag))
     --powertype_controls[unitTag]["DISPLAY_NAME"]:SetText(GetUnitDisplayName(unitTag))
     powertype_controls[unitTag]["RACE"]:SetText(GetUnitRace(unitTag))
@@ -299,7 +300,7 @@ function UI.InitUnitPower(unitTag)
       powertype_controls[unitTag]["CLASS_ICON"]:SetHidden(false)
       powertype_controls[unitTag]["RANK"]:SetHidden(false)
       if IsUnitChampion(unitTag) then
-        powertype_controls[unitTag]["RANK"]:SetText(cp)
+        powertype_controls[unitTag]["RANK"]:SetText(GetUnitChampionPoints(unitTag))
         powertype_controls[unitTag]["CHAMPION_ICON"]:SetHidden(false)
       else
         powertype_controls[unitTag]["RANK"]:SetText(GetUnitLevel(unitTag))
