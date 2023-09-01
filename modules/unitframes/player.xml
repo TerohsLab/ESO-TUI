@@ -2,9 +2,11 @@
     <Controls>
         <TopLevelControl name="UnitFramesPlayer" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false">
             <Dimensions x="300" y="50" />
-            <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="CENTER" offsetX="-510" offsetY="320"/>
+            <Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="CENTER" offsetX="-610" offsetY="320"/>
             <Controls>
+
                 <!-- HEALTH BAR -->
+
                 <Control name="$(parent)Health">
                     <Dimensions x="300" y="60" />
                     <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
@@ -36,62 +38,78 @@
                         </Backdrop>
                     </Controls>
                 </Control>
-                <!-- MAGICKA BAR -->
-                <Control name="$(parent)Magicka">
-                    <Dimensions x="300" y="20" />
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)Health" relativePoint="BOTTOMLEFT"/>
+
+                <Control>
+                    <Dimensions x="300" y="0" name="Attributes"/>
+
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)Health" relativePoint="TOPLEFT" offsetX="400" offsetY="-60"/>
+
+<!--                     <Anchor point="TOPLEFT" relativeTo="$(parent)Health" relativePoint="BOTTOMLEFT"/> -->
                     <Controls>
-                        <Backdrop name="$(parent)Backdrop" edgeColor="1a1a1a" centerColor="1a1a1a" alpha="1" layer="0" level="0">
-                            <Dimensions x="300" y="20" />
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
-                            <Edge edgeSize="0" />
-                        </Backdrop>
 
-                        <StatusBar name="$(parent)Bar" color="4F6F96" alpha="1" layer="0" level="1" textureFile="KharfUI/modules/unitframes/bar.dds">
-                            <Dimensions x="300" y="20" />
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
-                            <Limits min="0" max="100" />
-                        </StatusBar>
+                        <!-- STAMINA BAR -->
 
-                        <Label name="$(parent)ValueLabel" font="ZoFontWinH4" color="ffffff" scale="0.8">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10"/>
-                        </Label>
+                        <Control name="$(grandparent)Stamina">
+                            <Dimensions x="150" y="20" />
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="BOTTOMLEFT"/>
+                            <Controls>
+                                <Backdrop name="$(parent)Backdrop" edgeColor="1a1a1a" centerColor="1a1a1a" alpha="1" layer="0" level="0">
+                                    <Dimensions x="150" y="20" />
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+                                    <Edge edgeSize="0" />
+                                </Backdrop>
 
-                        <Backdrop name="$(parent)Border" edgeColor="000000" layer="0" level="2" centerColor="00000000" alpha="1" hidden="false">
-                            <Dimensions x="300" y="20" />
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
-                            <Edge edgeSize="1" />
-                        </Backdrop>
+                                <StatusBar name="$(parent)Bar" color="387039" alpha="1" layer="0" level="1" textureFile="KharfUI/modules/unitframes/bar.dds">
+                                    <Dimensions x="150" y="20" />
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
+                                    <Limits min="0" max="100" />
+                                </StatusBar>
+
+                                <Label name="$(parent)ValueLabel" font="ZoFontWinH4" color="ffffff" scale="0.8">
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10"/>
+                                </Label>
+
+                                <Backdrop name="$(parent)Border" edgeColor="000000" layer="0" level="2" centerColor="00000000" alpha="1" hidden="false">
+                                    <Dimensions x="150" y="20" />
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+                                    <Edge edgeSize="1" />
+                                </Backdrop>
+                            </Controls>
+                        </Control>
+
+                        <!-- MAGICKA BAR -->
+
+                        <Control name="$(grandparent)Magicka">
+                            <Dimensions x="150" y="20" />
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="BOTTOMLEFT" offsetX="150"/>
+                            <Controls>
+                                <Backdrop name="$(parent)Backdrop" edgeColor="1a1a1a" centerColor="1a1a1a" alpha="1" layer="0" level="0">
+                                    <Dimensions x="150" y="20" />
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+                                    <Edge edgeSize="0" />
+                                </Backdrop>
+
+                                <StatusBar name="$(parent)Bar" color="4F6F96" alpha="1" layer="0" level="1" textureFile="KharfUI/modules/unitframes/bar.dds">
+                                    <Dimensions x="150" y="20" />
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
+                                    <Limits min="0" max="100" />
+                                </StatusBar>
+
+                                <Label name="$(parent)ValueLabel" font="ZoFontWinH4" color="ffffff" scale="0.8">
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10"/>
+                                </Label>
+
+                                <Backdrop name="$(parent)Border" edgeColor="000000" layer="0" level="2" centerColor="00000000" alpha="1" hidden="false">
+                                    <Dimensions x="150" y="20" />
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
+                                    <Edge edgeSize="1" />
+                                </Backdrop>
+                            </Controls>
+                        </Control>
+
                     </Controls>
                 </Control>
-                <!-- STAMINA BAR -->
-                <Control name="$(parent)Stamina">
-                    <Dimensions x="300" y="20" />
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)Magicka" relativePoint="BOTTOMLEFT"/>
-                    <Controls>
-                        <Backdrop name="$(parent)Backdrop" edgeColor="1a1a1a" centerColor="1a1a1a" alpha="1" layer="0" level="0">
-                            <Dimensions x="300" y="20" />
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
-                            <Edge edgeSize="0" />
-                        </Backdrop>
 
-                        <StatusBar name="$(parent)Bar" color="387039" alpha="1" layer="0" level="1" textureFile="KharfUI/modules/unitframes/bar.dds">
-                            <Dimensions x="300" y="20" />
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0"/>
-                            <Limits min="0" max="100" />
-                        </StatusBar>
-
-                        <Label name="$(parent)ValueLabel" font="ZoFontWinH4" color="ffffff" scale="0.8">
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10"/>
-                        </Label>
-
-                        <Backdrop name="$(parent)Border" edgeColor="000000" layer="0" level="2" centerColor="00000000" alpha="1" hidden="false">
-                            <Dimensions x="300" y="20" />
-                            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT"/>
-                            <Edge edgeSize="1" />
-                        </Backdrop>
-                    </Controls>
-                </Control>
             </Controls>
         </TopLevelControl>
     </Controls>
