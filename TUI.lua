@@ -2,20 +2,20 @@ UI = {}
 UI.name = "TUI"
 
 local classIcons = {
-	[1] = [[/esoui/art/icons/class/class_dragonknight.dds]],
-	[2] = [[/esoui/art/icons/class/class_sorcerer.dds]],
-	[3] = [[/esoui/art/icons/class/class_nightblade.dds]],
-	[4] = [[/esoui/art/icons/class/class_warden.dds]],
-	[5] = [[/esoui/art/icons/class/class_necromancer.dds]],
-	[6] = [[/esoui/art/icons/class/class_templar.dds]],
-	[117] = [[/esoui/art/icons/class/class_arcanist.dds]],
+  [1] = [[/esoui/art/icons/class/class_dragonknight.dds]],
+  [2] = [[/esoui/art/icons/class/class_sorcerer.dds]],
+  [3] = [[/esoui/art/icons/class/class_nightblade.dds]],
+  [4] = [[/esoui/art/icons/class/class_warden.dds]],
+  [5] = [[/esoui/art/icons/class/class_necromancer.dds]],
+  [6] = [[/esoui/art/icons/class/class_templar.dds]],
+  [117] = [[/esoui/art/icons/class/class_arcanist.dds]],
 }
 
 local allianceIcons = {
-	[100] = [[/esoui/art/ava/ava_allianceflag_neutral.dds]],
-	[1] = [[/esoui/art/guild/guildbanner_icon_aldmeri.dds]],
-	[2] = [[/esoui/art/guild/guildbanner_icon_ebonheart.dds]],
-	[3] = [[/esoui/art/guild/guildbanner_icon_daggerfall.dds]],
+  [100] = [[/esoui/art/ava/ava_allianceflag_neutral.dds]],
+  [1] = [[/esoui/art/guild/guildbanner_icon_aldmeri.dds]],
+  [2] = [[/esoui/art/guild/guildbanner_icon_ebonheart.dds]],
+  [3] = [[/esoui/art/guild/guildbanner_icon_daggerfall.dds]],
 }
 
 function UI.OnAddOnLoaded(event, addonName)
@@ -38,7 +38,7 @@ function UI.OnUpdate()
   local ping = GetLatency()
   UnitFramesInfoRightBlockFPSLabel:SetText(string.format("%d fps & %s ms", framerate, ping))
   UnitFramesInfoRightBlockTimeLabel:SetText(string.format("%s", GetTimeString()))
-  if framerate > 30 and ping < 200  then
+  if framerate > 30 and ping < 200 then
     local color = ZO_ColorDef:New("387039")
     UnitFramesInfoRightBlockFPSLabel:SetColor(color:UnpackRGBA())
   else
@@ -47,8 +47,9 @@ function UI.OnUpdate()
   end
   local currencyType = CURT_MONEY
   local formatType = ZO_CURRENCY_FORMAT_AMOUNT_ICON
-  local currencyString = zo_strformat(SI_NUMBER_FORMAT, ZO_Currency_FormatKeyboard(currencyType,  GetCurrentMoney(), formatType))
-  UnitFramesInfoRightBlockGoldLabel:SetText(string.format("%s",currencyString))
+  local currencyString = zo_strformat(SI_NUMBER_FORMAT,
+    ZO_Currency_FormatKeyboard(currencyType, GetCurrentMoney(), formatType))
+  UnitFramesInfoRightBlockGoldLabel:SetText(string.format("%s", currencyString))
 end
 
 function UI.Initialize()
@@ -78,13 +79,13 @@ function UI.InitializeControls()
   }
   powertype_controls = {}
   powertype_controls["player"] = {
-    ["HEALTH_SHIELD_CURRENT_LABEL"] = UnitFramesPlayerHealthShieldValueLabel,
-    ["HEALTH_CURRENT_LABEL"] = UnitFramesPlayerHealthValueLabel,
-    ["HEALTH_BAR"] = UnitFramesPlayerHealthBar,
-    ["MAGICKA_CURRENT_LABEL"] = UnitFramesPlayerMagickaValueLabel,
-    ["MAGICKA_BAR"] = UnitFramesPlayerMagickaBar,
-    ["STAMINA_CURRENT_LABEL"] = UnitFramesPlayerStaminaValueLabel,
-    ["STAMINA_BAR"] = UnitFramesPlayerStaminaBar
+    ["HEALTH_SHIELD_CURRENT_LABEL"] = UnitFramesPlayerDefenceHealthShieldValueLabel,
+    ["HEALTH_CURRENT_LABEL"] = UnitFramesPlayerDefenceHealthValueLabel,
+    ["HEALTH_BAR"] = UnitFramesPlayerDefenceHealthBar,
+    ["MAGICKA_CURRENT_LABEL"] = UnitFramesPlayerResourceMagickaValueLabel,
+    ["MAGICKA_BAR"] = UnitFramesPlayerResourceMagickaBar,
+    ["STAMINA_CURRENT_LABEL"] = UnitFramesPlayerResourceStaminaValueLabel,
+    ["STAMINA_BAR"] = UnitFramesPlayerResourceStaminaBar
   }
   powertype_controls["reticleover"] = {
     ["RANK"] = UnitFramesTargetRank,
@@ -240,13 +241,13 @@ function UI.InitUnitPower(unitTag)
   local currentMagicka, maxMagicka, effectiveMaxMagicka = GetUnitPower(unitTag, POWERTYPE_MAGICKA)
   local currentStamina, maxStamina, effectiveMaxStamina = GetUnitPower(unitTag, POWERTYPE_STAMINA)
   local shield, _ =
-    GetUnitAttributeVisualizerEffectInfo(
-    unitTag,
-    ATTRIBUTE_VISUAL_POWER_SHIELDING,
-    STAT_MITIGATION,
-    ATTRIBUTE_HEALTH,
-    POWERTYPE_HEALTH
-  )
+      GetUnitAttributeVisualizerEffectInfo(
+        unitTag,
+        ATTRIBUTE_VISUAL_POWER_SHIELDING,
+        STAT_MITIGATION,
+        ATTRIBUTE_HEALTH,
+        POWERTYPE_HEALTH
+      )
   if unitTag == "player" then
     if shield == nil then
       powertype_controls[unitTag]["HEALTH_SHIELD_CURRENT_LABEL"]:SetText("")
@@ -306,7 +307,7 @@ function UI.InitUnitPower(unitTag)
         powertype_controls[unitTag]["RANK"]:SetText(GetUnitLevel(unitTag))
         powertype_controls[unitTag]["CHAMPION_ICON"]:SetHidden(true)
       end
-    else 
+    else
       powertype_controls[unitTag]["CLASS_ICON"]:SetHidden(true)
       powertype_controls[unitTag]["RANK"]:SetHidden(true)
       powertype_controls[unitTag]["CHAMPION_ICON"]:SetHidden(true)
@@ -355,26 +356,26 @@ function UI.HideControls()
   ZO_PlayerAttributeMagicka:UnregisterForEvent(EVENT_PLAYER_ACTIVATED)
   EVENT_MANAGER:UnregisterForUpdate("ZO_PlayerAttributeMagickaFadeUpdate")
   ZO_PlayerAttributeMagicka:SetHidden(true)
-  
+
   ZO_PlayerAttributeStamina:UnregisterForEvent(EVENT_POWER_UPDATE)
   ZO_PlayerAttributeStamina:UnregisterForEvent(EVENT_INTERFACE_SETTING_CHANGED)
   ZO_PlayerAttributeStamina:UnregisterForEvent(EVENT_PLAYER_ACTIVATED)
   EVENT_MANAGER:UnregisterForUpdate("ZO_PlayerAttributeStaminaFadeUpdate")
   ZO_PlayerAttributeStamina:SetHidden(true)
-  
+
   ZO_PlayerAttributeHealth:UnregisterForEvent(EVENT_POWER_UPDATE)
   ZO_PlayerAttributeHealth:UnregisterForEvent(EVENT_INTERFACE_SETTING_CHANGED)
   ZO_PlayerAttributeHealth:UnregisterForEvent(EVENT_PLAYER_ACTIVATED)
   EVENT_MANAGER:UnregisterForUpdate("ZO_PlayerAttributeHealthFadeUpdate")
   ZO_PlayerAttributeHealth:SetHidden(true)
-  
+
   ZO_PlayerAttributeMountStamina:UnregisterForEvent(EVENT_POWER_UPDATE)
   ZO_PlayerAttributeMountStamina:UnregisterForEvent(EVENT_INTERFACE_SETTING_CHANGED)
   ZO_PlayerAttributeMountStamina:UnregisterForEvent(EVENT_PLAYER_ACTIVATED)
   EVENT_MANAGER:UnregisterForUpdate("ZO_PlayerAttributeMountStamina")
   ZO_PlayerAttributeMountStamina:SetHidden(true)
 
- --[[  ZO_TargetUnitFramereticleover:SetHidden(true)
+  --[[  ZO_TargetUnitFramereticleover:SetHidden(true)
   ZO_TargetUnitFramereticleoverBarLeft:SetHidden(true)
   ZO_TargetUnitFramereticleoverBarLeftGloss:SetHidden(true)
   ZO_TargetUnitFramereticleoverBarRight:SetHidden(true)
@@ -407,7 +408,7 @@ function UI.HideCompass(hide)
   -- frame
   lCompassFrame = COMPASS_FRAME.control
   if lCompassFrame then
-    for lIndex, lPos in pairs({"Left", "Center", "Right"}) do
+    for lIndex, lPos in pairs({ "Left", "Center", "Right" }) do
       lWidget = lCompassFrame:GetNamedChild(lPos)
       if lWidget then
         lWidget:SetHidden(hide)
