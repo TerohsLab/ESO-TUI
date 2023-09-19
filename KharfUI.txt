@@ -1,11 +1,7 @@
 ﻿## Title: KharfUI
 ## APIVersion: 100026
-## OptionalDependsOn: LibStub LibAddonMenu-2.0
+## OptionalDependsOn:
 ## SavedVariables: KharfUISavedVariables
-
-libs\LibStub\LibStub.lua
-
-libs\LibAddonMenu-2.0\LibAddonMenu-2.0.lua
 
 KharfUI.xml
 modules\unitframes\player.xml
@@ -14,7 +10,6 @@ modules\unitframes\group1.xml
 modules\unitframes\group2.xml
 modules\unitframes\group3.xml
 modules\unitframes\group4.xml
-modules\unitframes\infoblock.xml
 modules\unitframes\infoblock_left.xml
 modules\unitframes\infoblock_right.xml
 KharfUI.lua
