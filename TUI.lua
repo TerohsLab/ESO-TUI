@@ -1,5 +1,5 @@
 UI = {}
-UI.name = "KharfUI"
+UI.name = "TUI"
 
 local classIcons = {
 	[1] = [[/esoui/art/icons/class/class_dragonknight.dds]],
@@ -30,7 +30,7 @@ end
 
 function UI.OnPlayerLoaded()
   EVENT_MANAGER:UnregisterForEvent(UI.name, EVENT_PLAYER_ACTIVATED)
-  CHAT_SYSTEM:AddMessage("KharfUI by @Kharf")
+  -- CHAT_SYSTEM:AddMessage("KharfUI by @Kharf")
 end
 
 function UI.OnUpdate()
