@@ -20,17 +20,39 @@ local allianceIcons = {
 
 function UI.OnAddOnLoaded(event, addonName)
   if addonName == UI.name then
-    UI.InitializeControls()
-    UI.HideControls()
-    UI.AddUiAsFragment()
-    UI.Initialize()
+    -- Register our events
+
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_PLAYER_ACTIVATED, UI.OnPlayerLoaded)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_POWER_UPDATE, UI.OnPowerUpdate)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED, UI.OnVisualAdded)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED, UI.OnVisualRemoved)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED, UI.OnVisualUpdated)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_RETICLE_TARGET_CHANGED, UI.OnTargetChanged)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_PLAYER_ALIVE, UI.OnPlayerRez)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_GROUP_MEMBER_JOINED, UI.OnGroupMemberJoined)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_GROUP_MEMBER_LEFT, UI.OnGroupMemberLeft)
+    EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UI.OnGroupMemberConnectionChanged)
+    EVENT_MANAGER:RegisterForUpdate(UI.name, 1000, UI.OnUpdate)
+
+    -- Unset our initial hook
+
     EVENT_MANAGER:UnregisterForEvent(UI.name, EVENT_ADD_ON_LOADED)
   end
 end
 
 function UI.OnPlayerLoaded()
+  -- Initialize our controls
+
+  UI.InitializeControls()
+  UI.HideControls()
+  UI.AddUiAsFragment()
+  UI.Initialize()
+
+  -- Unload our initial hook
+
   EVENT_MANAGER:UnregisterForEvent(UI.name, EVENT_PLAYER_ACTIVATED)
-  -- CHAT_SYSTEM:AddMessage("KharfUI by @Kharf")
+
+  -- CHAT_SYSTEM:AddMessage("garf")
 end
 
 function UI.OnUpdate()
@@ -55,6 +77,26 @@ end
 function UI.Initialize()
   UI.InitUnitPower("player")
   UI.InitializeGroup()
+  -- UI.InitializeSkillBar()
+end
+
+function UI.InitializeSkillBar()
+  local actionBar = ZO_ActionBar1
+  -- local actionBar = WINDOW_MANAGER:GetNamedChild("Z0_ActionBar1")
+
+  -- actionBar = GetControl(GuiRoot, "ActionBarContainer")
+  -- actionBar = WINDOW_MANAGER:GetNamedChild("ActionBarContainer")
+
+  -- actionBar = GetControl("Z0_ActionBar1")
+  -- actionBar = WINDOW_MANAGER:GetControlByName("Z0_ActionBar1")
+
+  actionBar:ClearAnchors()
+  actionBar:SetAnchor(CENTER, GuiRoot, CENTER)
+
+  -- actionBar:SetAnchor(CENTER,)
+
+  -- bar = WINDOW_MANAGER:GetControlByName("Z0_ActionBar1")
+  -- bar:SetAnchor(CENTER, GuiRoot, CENTER, 0, 0)
 end
 
 function UI.InitializeGroup()
@@ -455,15 +497,6 @@ function UI.OnGroupMemberConnectionChanged(eventCode, unitTag, isOnline)
   UI.InitializeGroup()
 end
 
+-- Load our addon
+
 EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_ADD_ON_LOADED, UI.OnAddOnLoaded)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_PLAYER_ACTIVATED, UI.OnPlayerLoaded)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_POWER_UPDATE, UI.OnPowerUpdate)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED, UI.OnVisualAdded)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED, UI.OnVisualRemoved)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED, UI.OnVisualUpdated)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_RETICLE_TARGET_CHANGED, UI.OnTargetChanged)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_PLAYER_ALIVE, UI.OnPlayerRez)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_GROUP_MEMBER_JOINED, UI.OnGroupMemberJoined)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_GROUP_MEMBER_LEFT, UI.OnGroupMemberLeft)
-EVENT_MANAGER:RegisterForEvent(UI.name, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UI.OnGroupMemberConnectionChanged)
-EVENT_MANAGER:RegisterForUpdate(UI.name, 1000, UI.OnUpdate)
