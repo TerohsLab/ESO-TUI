@@ -6,7 +6,7 @@
 
         <TopLevelControl name="UnitFramesPlayerDefence" clampedToScreen="true" mouseEnabled="true" movable="true">
 
-            <Anchor relativeTo="GuiRoot" point="TOPLEFT" relativePoint="CENTER" offsetX="-610" offsetY="320" />
+            <Anchor relativeTo="GuiRoot" point="CENTER" relativePoint="BOTTOM" offsetX="-475" offsetY="-350" />
             <Dimensions x="300" y="60" />
 
             <Controls>

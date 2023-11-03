@@ -76,12 +76,31 @@ end
 
 function UI.Initialize()
   UI.InitUnitPower("player")
-  UI.InitializeGroup()
-  -- UI.InitializeSkillBar()
+  -- UI.InitializeGroup()
+  UI.InitializeSkillBar()
 end
 
 function UI.InitializeSkillBar()
-  local actionBar = ZO_ActionBar1
+  local LActionBar = nil
+  local LBackBar = nil
+
+  LActionBar = GetControl("ZO_ActionBar1")
+  LBBackBar = GetControl("LUI_Backbar")
+
+  if LActionBar ~= nil then
+    LActionBar:ClearAnchors()
+    LActionBar:SetAnchor(CENTER, GuiRoot, BOTTOM, 0, -300)
+  end
+
+  if LBackBar ~= nil then
+    CHAT_SYSTEM:AddMessage("garf")
+    LBackBar:ClearAnchors()
+    LBackBar:SetAnchor(CENTER, GuiRoot, BOTTOM, 0, -300)
+  end
+
+
+
+
   -- local actionBar = WINDOW_MANAGER:GetNamedChild("Z0_ActionBar1")
 
   -- actionBar = GetControl(GuiRoot, "ActionBarContainer")
@@ -89,9 +108,6 @@ function UI.InitializeSkillBar()
 
   -- actionBar = GetControl("Z0_ActionBar1")
   -- actionBar = WINDOW_MANAGER:GetControlByName("Z0_ActionBar1")
-
-  actionBar:ClearAnchors()
-  actionBar:SetAnchor(CENTER, GuiRoot, CENTER)
 
   -- actionBar:SetAnchor(CENTER,)
 
