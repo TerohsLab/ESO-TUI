@@ -11,7 +11,7 @@ TUI.lua
 
 TUI.xml
 
-modules\unitframes\player.xml
+modules\unitframes\player_attributes_horizontal.xml
 modules\unitframes\target.xml
 modules\unitframes\group1.xml
 modules\unitframes\group2.xml

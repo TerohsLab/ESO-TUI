@@ -6,7 +6,7 @@
 
         <TopLevelControl name="UnitFramesPlayerDefence" clampedToScreen="true" mouseEnabled="true" movable="true">
 
-            <Anchor relativeTo="GuiRoot" point="TOPLEFT" relativePoint="CENTER" offsetX="-610" offsetY="320" />
+            <Anchor relativeTo="GuiRoot" point="CENTER" relativePoint="BOTTOM" offsetX="-425" offsetY="-350" />
             <Dimensions x="300" y="60" />
 
             <Controls>
@@ -62,15 +62,15 @@
 
         <TopLevelControl name="UnitFramesPlayerResource" clampedToScreen="true" mouseEnabled="true" movable="true">
 
-            <Anchor relativeTo="GuiRoot" point="TOPLEFT" relativePoint="CENTER" offsetX="-610" offsetY="320" />
-            <Dimensions x="300" y="60" />
+            <Anchor relativeTo="GuiRoot" point="CENTER" relativePoint="BOTTOM" offsetX="0" offsetY="-440" />
+            <Dimensions x="300" y="20" />
 
             <Controls>
 
-                <Control>
+                <Control name="$(parent)Attributes">
 
-                    <Anchor point="TOPLEFT" relativeTo="$(parent)Health" relativePoint="TOPLEFT" offsetX="400" offsetY="-60" />
-                    <Dimensions x="300" y="0" name="Attributes" />
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0" />
+                    <Dimensions x="300" y="20"  />
 
                     <Controls>
 
