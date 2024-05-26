@@ -40,6 +40,23 @@ function UI.OnAddOnLoaded(event, addonName)
   end
 end
 
+function TempFixActionBar()
+
+  -- Quick fix for making the quickslot button not spazz out on FancyActionBars
+
+  local LQuickSlotButton = nil
+
+  LQuickSlotButton = GetControl("QuickslotButton");
+
+  if LQuickSlotButton  ~= nil then
+
+     LQuickSlotButton:ClearAnchors()
+     LQuickSlotButton:SetAnchor(RIGHT, CompanionUltimateButton, LEFT, 35, 0)
+
+  end
+
+end
+
 function UI.OnPlayerLoaded()
   -- Initialize our controls
 
@@ -76,30 +93,39 @@ end
 
 function UI.Initialize()
   UI.InitUnitPower("player")
-  -- UI.InitializeGroup()
+  UI.InitializeGroup()
   UI.InitializeSkillBar()
 end
 
 function UI.InitializeSkillBar()
+
   local LActionBar = nil
   local LBackBar = nil
 
   LActionBar = GetControl("ZO_ActionBar1")
+
   LBBackBar = GetControl("LUI_Backbar")
 
+  -- Vanilla Action Bar
+
   if LActionBar ~= nil then
+
     LActionBar:ClearAnchors()
-    LActionBar:SetAnchor(CENTER, GuiRoot, BOTTOM, 0, -300)
+    LActionBar:SetAnchor(CENTER, GuiRoot, BOTTOM, 0, -320)
+
+    -- Quick fix for making the quickslot button not spazz out on FancyActionBars
+
+    TempFixActionBar()
+
   end
+
+  -- LUI Action Bar
 
   if LBackBar ~= nil then
     CHAT_SYSTEM:AddMessage("garf")
     LBackBar:ClearAnchors()
     LBackBar:SetAnchor(CENTER, GuiRoot, BOTTOM, 0, -300)
   end
-
-
-
 
   -- local actionBar = WINDOW_MANAGER:GetNamedChild("Z0_ActionBar1")
 
@@ -113,17 +139,27 @@ function UI.InitializeSkillBar()
 
   -- bar = WINDOW_MANAGER:GetControlByName("Z0_ActionBar1")
   -- bar:SetAnchor(CENTER, GuiRoot, CENTER, 0, 0)
+
 end
 
 function UI.InitializeGroup()
-  for i = 1, 4 do
-    unitTag = "group" .. i
-    if DoesUnitExist(unitTag) then
-      UI.InitUnitPower(unitTag)
-    else
-      UI.SetHidden(unitTag, true)
-    end
-  end
+
+
+  -- Temp fix for quickbar button
+
+  TempFixActionBar()
+
+  -- Actually disabling group frames since its not working for groups larger then 4
+
+  -- for i = 1, 4 do
+  --   unitTag = "group" .. i
+  --   if DoesUnitExist(unitTag) then
+  --     UI.InitUnitPower(unitTag)
+  --   else
+  --     UI.SetHidden(unitTag, true)
+  --   end
+  -- end
+
 end
 
 function UI.InitializeControls()
